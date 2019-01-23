@@ -2,6 +2,8 @@
 
 namespace comero278\ObjectOrientedProject;
 
+use Deepdivedylan\DataDesign\ValidateUuid;
+
 /**
  * Author profile
  *
@@ -10,14 +12,15 @@ namespace comero278\ObjectOrientedProject;
  * @author Cassandra Romero cromero278@cnm.edu
  **/
 class Author {
+	use ValidateUuid;
 /**
  * Id for this author, this is the primary key
  **/
-	private $authorID;
+	private $authorId;
 /**
  * URL for the author's avatar
  */
-	private $authorAvatarURL;
+	private $authorAvatarUrl;
 /**
  * One-time activation token used for author account creation
  */
@@ -35,13 +38,46 @@ class Author {
  */
 private $authorUsername;
 
+	public function __construct($newAuthorId, $newAuthorAvatarUrl, $newAuthorActivationToken, $newAuthorEmail, $newAuthorHash, $newAuthorUsername) {
+		try {
+			$this->setAuthorId($newAuthorId);
+			$this->setAuthorAvatarUrl ($newAuthorAvatarUrl);
+			$this->setAuthorActivationToken($newAuthorActivationToken);
+			$this->setAuthorEmail($newAuthorEmail);
+			$this->setAuthorHash($newAuthorHash);
+			$this->setAuthorUsername($newAuthorUsername);
+		}
+			//determine what exception type was thrown
+		catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+	}
+
 /*
  * accessor method for profile id
  *
  * @return binary value of profile id
  */
 	public function getAuthorId() {
-		return($this->authorID);
+		return($this->authorId);
+	}
+	/*
+ * mutator method for author id
+ *
+ * @param Uuid | string $newAuthorId value of new author id
+ * @throws \RangeException if $newAuthor Id is > 16
+ * @throws \TypeError if author id is not binary
+ */
+	private function setAuthorId($newAuthorId) : void {
+		try {
+			$uuid = self::validateUuid($newAuthorId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		// convert and store the author id
+		$this->authorId = $uuid;
 	}
 /*
  * accessor method for author avatar url
@@ -49,7 +85,12 @@ private $authorUsername;
  * @return var char URL for author avatar
  */
 	public function getAuthorAvatarUrl() {
-		return ($this->authorAvatarURL);
+		return ($this->authorAvatarUrl);
+	}
+
+	private function setAuthorAvatarUrl ($newAuthorAvatarUrl){
+
+		$this->authorAvatarUrl = $newAuthorAvatarUrl;
 	}
 	/*
  * accessor method for author activation token
