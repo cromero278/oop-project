@@ -1,7 +1,8 @@
 <?php
 
-namespace comero278\ObjectOrientedProject;
+namespace comero278\oop;
 
+use Deepdivedylan\DataDesign\ValidateDate;
 use Deepdivedylan\DataDesign\ValidateUuid;
 
 /**
@@ -12,6 +13,7 @@ use Deepdivedylan\DataDesign\ValidateUuid;
  * @author Cassandra Romero cromero278@cnm.edu
  **/
 class Author {
+	use ValidateDate;
 	use ValidateUuid;
 /**
  * Id for this author, this is the primary key
@@ -38,6 +40,21 @@ class Author {
  */
 private $authorUsername;
 
+	/**
+	 * constructor for author
+	 *
+	 * @param string|Uuid $newAuthorId id of this author
+	 * @param string $newAuthorAvatarUrl string containing url of author avatar
+	 * @param string $newAuthorActivationToken string containing activation token for account creation
+	 * @param string $newAuthorEmail unique string containing unique author email address
+	 * @param string $newAuthorHash string containing hashed author password
+	 * @param string $newAuthorUsername string containing unique author username
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exception occurs
+	**/
+
 	public function __construct($newAuthorId, $newAuthorAvatarUrl, $newAuthorActivationToken, $newAuthorEmail, $newAuthorHash, $newAuthorUsername) {
 		try {
 			$this->setAuthorId($newAuthorId);
@@ -47,7 +64,6 @@ private $authorUsername;
 			$this->setAuthorHash($newAuthorHash);
 			$this->setAuthorUsername($newAuthorUsername);
 		}
-			//determine what exception type was thrown
 		catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -87,8 +103,12 @@ private $authorUsername;
 	public function getAuthorAvatarUrl() {
 		return ($this->authorAvatarUrl);
 	}
-
-	private function setAuthorAvatarUrl ($newAuthorAvatarUrl){
+/*
+ * mutator method for author avatar url
+ * @param string $newAuthorAvatarUrl
+ * @throws\InvalidArgumentException if empty
+ */
+	private function setAuthorAvatarUrl (string $newAuthorAvatarUrl){
 		if(empty($newAuthorAvatarUrl)===true) {
 			throw (new \InvalidArgumentException("profile avatar URL is empty"));
 		}
@@ -102,8 +122,12 @@ private $authorUsername;
 	public function getAuthorActivationToken(){
 		return($this->authorActivationToken);
 		}
-
-		private function setAuthorActivationToken ($newAuthorActivationToken){
+/*
+ * mutator method for author activation token
+ * @param string $newAuthorActivationToken
+ * @throws \RageException if activation token is not 32 characters
+ */
+		private function setAuthorActivationToken (string $newAuthorActivationToken){
 			if(strlen($newAuthorActivationToken) !== 32) {
 				throw(new\RangeException("user activation token has to be 32"));
 			}
@@ -117,11 +141,18 @@ private $authorUsername;
 	public function getAuthorEmail(){
 		return($this->authorEmail);
 		}
+
+		/*
+		 * mutator method for author email
+		 *
+		 * @param string $newAuthorEmail
+		 * @throws \RangeException if string length is greater than 128 characters
+		 */
 	private function setAuthorEmail (string $newAuthorEmail) {
 		$newAuthorEmail = trim($newAuthorEmail);
 		$newAuthorEmail = filter_var($newAuthorEmail, FILTER_VALIDATE_EMAIL);
 		if(strlen($newAuthorEmail) > 128) {
-			throw(new \RangeException(" email is too large"));
+			throw(new \RangeException(" email is too long"));
 		}
 		$this->authorEmail = $newAuthorEmail;
 	}
@@ -135,13 +166,13 @@ private $authorUsername;
 		return($this->authorHash);
 	}
 /*
- * mutator function for author hash
+ * mutator method for author hash
  *
  * @param string $newAuthorHash
  * @throws \InvalidArgumentException if hash is empty
  * @throws \RangeException if hash is not 97 characters
  */
-	private function setAuthorHash($newAuthorHash){
+	private function setAuthorHash(string $newAuthorHash){
 
 		if (empty($newAuthorHash)===true){
 			throw(new \InvalidArgumentException("hash is empty"));
@@ -160,7 +191,7 @@ private $authorUsername;
 		return($this->authorUsername);
 	}
 /*
- * mutator function for author username
+ * mutator method for author username
  *
  * @param string authorUsername is $newAuthorUsername
  * @throws \InvalidArgumentException if the username is empty
