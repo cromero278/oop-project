@@ -118,6 +118,7 @@ private $authorUsername;
 		return($this->authorEmail);
 		}
 	private function setAuthorEmail (string $newAuthorEmail) {
+		$newAuthorEmail = trim($newAuthorEmail);
 		$newAuthorEmail = filter_var($newAuthorEmail, FILTER_VALIDATE_EMAIL);
 		if(strlen($newAuthorEmail) > 128) {
 			throw(new \RangeException(" email is too large"));
@@ -133,7 +134,13 @@ private $authorUsername;
 	public function getAuthorHash(){
 		return($this->authorHash);
 	}
-
+/*
+ * mutator function for author hash
+ *
+ * @param string $newAuthorHash
+ * @throws \InvalidArgumentException if hash is empty
+ * @throws \RangeException if hash is not 97 characters
+ */
 	private function setAuthorHash($newAuthorHash){
 
 		if (empty($newAuthorHash)===true){
@@ -152,7 +159,12 @@ private $authorUsername;
 	public function getAuthorUsername(){
 		return($this->authorUsername);
 	}
-
+/*
+ * mutator function for author username
+ *
+ * @param string authorUsername is $newAuthorUsername
+ * @throws \InvalidArgumentException if the username is empty
+ */
 	private function setAuthorUsername($newAuthorUsername){
 
 		$newAuthorUsername = trim($newAuthorUsername);
