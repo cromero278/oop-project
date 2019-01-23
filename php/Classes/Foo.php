@@ -9,18 +9,36 @@ namespace comero278\ObjectOrientedProject;
  *
  * @author Cassandra Romero cromero278@cnm.edu
  **/
-
 class Author {
-	/**
-	 * Id for this author, this is the primary key.
-	 **/
+/**
+ * Id for this author, this is the primary key
+ **/
 	private $authorID;
 /**
- * URL for the author's avatar.
+ * URL for the author's avatar
  */
 	private $authorAvatarURL;
+/**
+ * One-time activation token used for author account creation
+ */
+	private $authorActivationToken;
+/*
+ * Author email address, this email must be unique
+ */
+	private $authorEmailAddress;
+/*
+ * Author's encrypted password
+ */
+	private $authorHash;
+/*
+ * Author's unique username
+ */
+private $authorUsername;
 
-
-
+/*
+ * accessor method for profile id
+ *
+ * @return binary value of profile id
+ */
 
 }
