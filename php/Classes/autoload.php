@@ -1,4 +1,7 @@
 <?php
+
+namespace comero278\ObjectOrientedProject;
+
 /**
  * PSR-4 Compliant Autoloader
  *

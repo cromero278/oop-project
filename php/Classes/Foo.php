@@ -118,9 +118,9 @@ private $authorUsername;
 		return($this->authorEmail);
 		}
 	private function setAuthorEmail (string $newAuthorEmail) {
-		$newProfileEmail = filter_var($newAuthorEmail, FILTER_VALIDATE_EMAIL);
+		$newAuthorEmail = filter_var($newAuthorEmail, FILTER_VALIDATE_EMAIL);
 		if(strlen($newAuthorEmail) > 128) {
-			throw(new \RangeException("profile email is too large"));
+			throw(new \RangeException(" email is too large"));
 		}
 		$this->authorEmail = $newAuthorEmail;
 	}
@@ -133,6 +133,17 @@ private $authorUsername;
 	public function getAuthorHash(){
 		return($this->authorHash);
 	}
+
+	private function setAuthorHash($newAuthorHash){
+
+		if (empty($newAuthorHash)===true){
+			throw(new \InvalidArgumentException("hash is empty"));
+		}
+		if (strlen($newAuthorHash) !== 97){
+			throw(new \RangeException("hash must be 97 characters"));
+		}
+		$this->authorHash = $newAuthorHash;
+	}
 /*
  * accessor method for author username
  *
@@ -140,5 +151,14 @@ private $authorUsername;
  */
 	public function getAuthorUsername(){
 		return($this->authorUsername);
+	}
+
+	private function setAuthorUsername($newAuthorUsername){
+
+		$newAuthorUsername = trim($newAuthorUsername);
+		if(empty($newAuthorUsername)===true){
+			throw(new \InvalidArgumentException("username is empty"));
+		}
+		$this->authorUsername = $newAuthorUsername;
 	}
 }
