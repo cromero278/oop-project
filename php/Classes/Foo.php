@@ -66,8 +66,8 @@ private $authorUsername;
  * mutator method for author id
  *
  * @param Uuid | string $newAuthorId value of new author id
- * @throws \RangeException if $newAuthor Id is > 16
- * @throws \TypeError if author id is not binary
+ * @throws \RangeException if $newAuthorId is > 16
+ * @throws \TypeError if $newAuthorId is not binary
  */
 	private function setAuthorId($newAuthorId) : void {
 		try {
@@ -89,7 +89,9 @@ private $authorUsername;
 	}
 
 	private function setAuthorAvatarUrl ($newAuthorAvatarUrl){
-
+		if(empty($newAuthorAvatarUrl)===true) {
+			throw (new \InvalidArgumentException("profile avatar URL is empty"));
+		}
 		$this->authorAvatarUrl = $newAuthorAvatarUrl;
 	}
 	/*
@@ -100,6 +102,13 @@ private $authorUsername;
 	public function getAuthorActivationToken(){
 		return($this->authorActivationToken);
 		}
+
+		private function setAuthorActivationToken ($newAuthorActivationToken){
+			if(strlen($newAuthorActivationToken) !== 32) {
+				throw(new\RangeException("user activation token has to be 32"));
+			}
+		$this->authorActivationToken = $newAuthorActivationToken;
+		}
 /*
  * accessor method for author email address
  *
@@ -108,6 +117,14 @@ private $authorUsername;
 	public function getAuthorEmail(){
 		return($this->authorEmail);
 		}
+	private function setAuthorEmail (string $newAuthorEmail) {
+		$newProfileEmail = filter_var($newAuthorEmail, FILTER_VALIDATE_EMAIL);
+		if(strlen($newAuthorEmail) > 128) {
+			throw(new \RangeException("profile email is too large"));
+		}
+		$this->authorEmail = $newAuthorEmail;
+	}
+
 		/*
 		 * accessor method for author hash
 		 *
