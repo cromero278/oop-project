@@ -25,7 +25,7 @@ class Author {
 /*
  * Author email address, this email must be unique
  */
-	private $authorEmailAddress;
+	private $authorEmail;
 /*
  * Author's encrypted password
  */
@@ -40,5 +40,47 @@ private $authorUsername;
  *
  * @return binary value of profile id
  */
-
+	public function getAuthorId() {
+		return($this->authorID);
+	}
+/*
+ * accessor method for author avatar url
+ *
+ * @return var char URL for author avatar
+ */
+	public function getAuthorAvatarUrl() {
+		return ($this->authorAvatarURL);
+	}
+	/*
+ * accessor method for author activation token
+	 *
+ * @returns characters in author activation token
+ */
+	public function getAuthorActivationToken(){
+		return($this->authorActivationToken);
+		}
+/*
+ * accessor method for author email address
+ *
+ * @returns unique var char email address
+ */
+	public function getAuthorEmail(){
+		return($this->authorEmail);
+		}
+		/*
+		 * accessor method for author hash
+		 *
+		 * @returns characters for hashed user password
+		 */
+	public function getAuthorHash(){
+		return($this->authorHash);
+	}
+/*
+ * accessor method for author username
+ *
+ * @returns unique var char for author username
+ */
+	public function getAuthorUsername(){
+		return($this->authorUsername);
+	}
 }
