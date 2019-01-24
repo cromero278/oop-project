@@ -1,12 +1,20 @@
 <?php
 
-include("author.php");
+namespace comero278\oop;
 
-$test = new \comero278\oop\Author();
-$test-> setAuthorUsername("testUsername");
-$test-> setAuthorEmail("test@email.com");
+use comero278\oop\Author;
+
+$test = new Author;
+
 $test->setAuthorId("8eb2afba6ae64749919abcffb904dbe6");
-$test->setAuthorHash("nanananananananananananananananananananananananananananananananananananananananananananananananaa");
-$test->setAuthorActivationToken("hahahahahahahahahahahahahahahaha");
 $test->setAuthorAvatarUrl("www.mynewavatar.com/1234321");
+$test->setAuthorActivationToken("hahahahahahahahahahahahahahahaha");
+$test-> setAuthorEmail("test@email.com");
+$test->setAuthorHash("nanananananananananananananananananananananananananananananananananananananananananananananananaa");
+$test-> setAuthorUsername("testUsername");
+
+
+
+
+
 
