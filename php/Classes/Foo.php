@@ -2,8 +2,8 @@
 
 namespace comero278\oop;
 
-use Deepdivedylan\DataDesign\ValidateDate;
-use Deepdivedylan\DataDesign\ValidateUuid;
+use cromero278\oop\ValidateUuid;
+use cromero278\oop\ValidateDate;
 
 /**
  * Author profile
@@ -43,7 +43,7 @@ private $authorUsername;
 	/**
 	 * constructor for author
 	 *
-	 * @param string|Uuid $newAuthorId id of this author
+	 * @param string|`Uuid $newAuthorId id of this author
 	 * @param string $newAuthorAvatarUrl string containing url of author avatar
 	 * @param string $newAuthorActivationToken string containing activation token for account creation
 	 * @param string $newAuthorEmail unique string containing unique author email address
