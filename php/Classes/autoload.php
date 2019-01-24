@@ -1,6 +1,5 @@
 <?php
-
-namespace comero278\oop;
+namespace cromero278\oop;
 /**
  * PSR-4 Compliant Autoloader
  *

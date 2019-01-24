@@ -1,10 +1,10 @@
 <?php
 
-namespace comero278\oop;
+namespace cromero278\oop;
+
+require_once("autoload.php");
 
 use cromero278\oop\ValidateUuid;
-use cromero278\oop\ValidateDate;
-
 
 /**
  * Author profile
@@ -14,7 +14,6 @@ use cromero278\oop\ValidateDate;
  * @author Cassandra Romero cromero278@cnm.edu
  **/
 class Author {
-	use ValidateDate;
 	use ValidateUuid;
 /**
  * Id for this author, this is the primary key
@@ -86,7 +85,7 @@ class Author {
  * @throws \RangeException if $newAuthorId is > 16
  * @throws \TypeError if $newAuthorId is not binary
  */
-	public function setAuthorId($newAuthorId) : void {
+	public function setAuthorId($newAuthorId){
 		try {
 			$uuid = self::validateUuid($newAuthorId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {

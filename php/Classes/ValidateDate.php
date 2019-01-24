@@ -1,5 +1,6 @@
 <?php
 namespace cromero278\oop;
+require_once(dirname(__DIR__, 1) . "/Classes/autoload.php");
 /**
  * Trait to Validate a mySQL Date
  *
