@@ -1,11 +1,12 @@
 <?php
 
-namespace cromero278\oop;
+namespace Deepdivedylan\DataDesign;
 
 require_once("autoload.php");
+require_once ("ValidateUuid.php");
+require_once("../../vendor/autoload.php");
 
-use cromero278\oop\ValidateUuid;
-
+use Ramsey\Uuid\Uuid;
 /**
  * Author profile
  *
@@ -15,6 +16,7 @@ use cromero278\oop\ValidateUuid;
  **/
 class Author {
 	use ValidateUuid;
+
 /**
  * Id for this author, this is the primary key
  **/
@@ -87,6 +89,7 @@ class Author {
  */
 	public function setAuthorId($newAuthorId){
 		try {
+			//$uuid=$newAuthorId;
 			$uuid = self::validateUuid($newAuthorId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
