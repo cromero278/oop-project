@@ -5,6 +5,7 @@ namespace comero278\oop;
 use cromero278\oop\ValidateUuid;
 use cromero278\oop\ValidateDate;
 
+
 /**
  * Author profile
  *
@@ -38,7 +39,7 @@ class Author {
 /*
  * Author's unique username
  */
-private $authorUsername;
+	private $authorUsername;
 
 	/**
 	 * constructor for author
@@ -85,7 +86,7 @@ private $authorUsername;
  * @throws \RangeException if $newAuthorId is > 16
  * @throws \TypeError if $newAuthorId is not binary
  */
-	private function setAuthorId($newAuthorId) : void {
+	public function setAuthorId($newAuthorId) : void {
 		try {
 			$uuid = self::validateUuid($newAuthorId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -108,7 +109,7 @@ private $authorUsername;
  * @param string $newAuthorAvatarUrl
  * @throws\InvalidArgumentException if empty
  */
-	private function setAuthorAvatarUrl (string $newAuthorAvatarUrl){
+	public function setAuthorAvatarUrl (string $newAuthorAvatarUrl){
 		if(empty($newAuthorAvatarUrl)===true) {
 			throw (new \InvalidArgumentException("profile avatar URL is empty"));
 		}
@@ -127,7 +128,7 @@ private $authorUsername;
  * @param string $newAuthorActivationToken
  * @throws \RageException if activation token is not 32 characters
  */
-		private function setAuthorActivationToken (string $newAuthorActivationToken){
+		public function setAuthorActivationToken (string $newAuthorActivationToken){
 			if(strlen($newAuthorActivationToken) !== 32) {
 				throw(new\RangeException("user activation token has to be 32"));
 			}
@@ -148,7 +149,7 @@ private $authorUsername;
 		 * @param string $newAuthorEmail
 		 * @throws \RangeException if string length is greater than 128 characters
 		 */
-	private function setAuthorEmail (string $newAuthorEmail) {
+	public function setAuthorEmail (string $newAuthorEmail) {
 		$newAuthorEmail = trim($newAuthorEmail);
 		$newAuthorEmail = filter_var($newAuthorEmail, FILTER_VALIDATE_EMAIL);
 		if(strlen($newAuthorEmail) > 128) {
@@ -172,7 +173,7 @@ private $authorUsername;
  * @throws \InvalidArgumentException if hash is empty
  * @throws \RangeException if hash is not 97 characters
  */
-	private function setAuthorHash(string $newAuthorHash){
+	public function setAuthorHash(string $newAuthorHash){
 
 		if (empty($newAuthorHash)===true){
 			throw(new \InvalidArgumentException("hash is empty"));
@@ -196,7 +197,7 @@ private $authorUsername;
  * @param string authorUsername is $newAuthorUsername
  * @throws \InvalidArgumentException if the username is empty
  */
-	private function setAuthorUsername($newAuthorUsername){
+	public function setAuthorUsername($newAuthorUsername){
 
 		$newAuthorUsername = trim($newAuthorUsername);
 		if(empty($newAuthorUsername)===true){
