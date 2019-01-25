@@ -207,4 +207,15 @@ class Author {
 		}
 		$this->authorUsername = $newAuthorUsername;
 	}
+	public function insert (\PDO $pdo) : void {
+
+		$query = "INSERT INTO author (authorId, authorAvatarUrl, authorActivationToken, authorEmail, authorHash, authorUsername)
+VALUES ( :authorId, :authorAvatarUrl, :authorActivationToken, :authorEmail, :authorHash, :authorUsername)";
+
+$statement = $pdo-> prepare($query);
+
+$parameters = ["authorId" => $this->authorId->getBytes(), "authorActivationToken" => $this->authorActivationToken->getBytes()];
+
+
+	}
 }
