@@ -1,17 +1,17 @@
 <?php
 
-namespace Deepdivedylan\DataDesign;
+namespace cromero278\oop;
 
+require_once(dirname(__DIR__, 1) . "/Classes/autoload.php");
 require_once("autoload.php");
 require_once ("ValidateUuid.php");
-require_once("../../vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 /**
  * Author profile
  *
  * This class shows data collected and stored for an author profile, including email, username, avatar, etc.
- *
+
  * @author Cassandra Romero cromero278@cnm.edu
  **/
 class Author {
