@@ -228,7 +228,7 @@ $statement->execute($parameters);
 
 	public function update (\PDO $pdo) : void {
 
-		$query= "UPDATE author (authorId, authorAvatarUrl, authorActivationToken, authorEmail, authorHash, authorUsername)";
+		$query = "UPDATE author SET authorId = :authorId, authorAvatarUrl = :authorAvatarUrl, authorActivationToken = :authorActivationToken, authorEmail = :authorEmail, authorHash = :authorHash, authorUsername = :authorUsername";
 		
 		$statement = $pdo-> prepare($query);
 
@@ -237,4 +237,14 @@ $statement->execute($parameters);
 
 $statement->execute($parameters);
  }
+ public function delete (\PDO $pdo) {
+
+		$query = "DELETE FROM author WHERE authorAvatarUrl = :authorAvatarUrl";
+
+		$statement = $pdo->prepare($query);
+
+		$parameters = ["authorAvatarUrl" => $this->authorAvatarUrl->getBytes()];
+		$statement->execute($parameters);
+ }
+
 }
