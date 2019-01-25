@@ -207,6 +207,13 @@ class Author {
 		}
 		$this->authorUsername = $newAuthorUsername;
 	}
+
+	/**
+	 * inserts new author into MySQL
+	 * @param \PDO $pdo
+	 * @throws \PDOException for MySQL related errors
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 */
 	public function insert (\PDO $pdo) : void {
 
 		$query = "INSERT INTO author (authorId, authorAvatarUrl, authorActivationToken, authorEmail, authorHash, authorUsername)
@@ -214,8 +221,20 @@ VALUES ( :authorId, :authorAvatarUrl, :authorActivationToken, :authorEmail, :aut
 
 $statement = $pdo-> prepare($query);
 
-$parameters = ["authorId" => $this->authorId->getBytes(), "authorActivationToken" => $this->authorActivationToken->getBytes()];
-
-
+$parameters = ["authorId" => $this->authorId->getBytes(),"authorAvatarUrl" => $this->authorAvatarUrl->getBytes(), "authorActivationToken" => $this->authorActivationToken->getBytes(),
+	"authorEmail" => $this->authorEmail->getBytes(), "authorHash" => $this->authorHash->getBytes(), "authorUsername" => $this->authorUsername->getBytes()];
+$statement->execute($parameters);
 	}
+
+	public function update (\PDO $pdo) : void {
+
+		$query= "UPDATE author (authorId, authorAvatarUrl, authorActivationToken, authorEmail, authorHash, authorUsername)";
+		
+		$statement = $pdo-> prepare($query);
+
+		$parameters = ["authorId" => $this->authorId->getBytes(),"authorAvatarUrl" => $this->authorAvatarUrl->getBytes(), "authorActivationToken" => $this->authorActivationToken->getBytes(),
+	"authorEmail" => $this->authorEmail->getBytes(), "authorHash" => $this->authorHash->getBytes(), "authorUsername" => $this->authorUsername->getBytes()];
+
+$statement->execute($parameters);
+ }
 }
