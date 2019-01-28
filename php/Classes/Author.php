@@ -275,7 +275,8 @@ VALUES ( :authorId, :authorAvatarUrl, :authorActivationToken, :authorEmail, :aut
 	 * gets author username by author id
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @return string stating author username
+	 * @param $authorId
+	 * @return Author
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
