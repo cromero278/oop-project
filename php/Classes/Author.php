@@ -286,7 +286,7 @@ VALUES ( :authorId, :authorAvatarUrl, :authorActivationToken, :authorEmail, :aut
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		$query = "SELECT authorId, authorActivationToken, authorAvatarUrl, authorEmail, authorHash, authorUsername FROM author WHERE authorId = :authorId";
+		$query = "SELECT authorId, authorAvatarUrl, authorActivationToken, authorEmail, authorHash, authorUsername FROM author WHERE authorId = :authorId";
 		$statement = $pdo->prepare($query);
 		$parameters = ["authorId" => $authorId->getBytes()];
 
@@ -322,9 +322,7 @@ VALUES ( :authorId, :authorAvatarUrl, :authorActivationToken, :authorEmail, :aut
 
 		$author = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		$row = $statement->fetch();
-		while($row !== false) {
-
+		while(($row = $statement->fetch()) !== false) {
 			try{
 			$author = new Author($row["authorId"], $row["authorAvatarUrl"], $row["authorActivationToken"], $row["authorEmail"], $row["authorHash"], $row["authorUsername"]);
 			$authors[$authors->key()] = $author;
